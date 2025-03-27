@@ -1,3 +1,4 @@
+
 import { predefinedUsers, PredefinedUser } from '@/data/predefinedUsers';
 
 // Auth context type
@@ -7,7 +8,12 @@ export type AuthContextType = {
     logout: () => void;
     setInitialPin: (username: string, pin: string) => Promise<boolean>;
     isFirstLogin: (username: string) => boolean;
+    register?: (username: string, email: string, password: string) => Promise<boolean>;
+    isAuthenticated?: boolean;
 };
+
+// Re-export the PredefinedUser type
+export type { PredefinedUser };
 
 // Function to check if a username exists in our predefined list
 export function userExists(username: string): boolean {

@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   authenticateUser,
@@ -13,6 +14,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<PredefinedUser | null>(null);
+  const isAuthenticated = !!user;
 
   useEffect(() => {
     // Initialize users in local storage
@@ -56,7 +58,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     login,
     logout,
     setInitialPin,
-    isFirstLogin
+    isFirstLogin,
+    isAuthenticated
   };
 
   return (
