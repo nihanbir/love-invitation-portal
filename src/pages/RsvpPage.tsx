@@ -150,7 +150,7 @@ const RsvpPage = () => {
                                         <Button
                                             variant="outline"
                                             onClick={() => navigate('/')}
-                                            className="border-wedding-primary text-wedding-primary hover:bg-wedding-primary/10"
+                                            className="border-wedding-primary hover:border-wedding-accent hover:bg-wedding-accent/90 hover:text-white"
                                         >
                                             Back to Home
                                         </Button>
@@ -158,7 +158,7 @@ const RsvpPage = () => {
                                             <Button
                                                 variant="outline"
                                                 onClick={logout}
-                                                className="border-wedding-primary text-wedding-primary hover:bg-wedding-primary/10"
+                                                className="border-wedding-primary hover:border-wedding-accent hover:bg-wedding-accent/90 hover:text-white"
                                             >
                                                 Logout
                                             </Button>
