@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   authenticateUser,
@@ -14,13 +13,11 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<PredefinedUser | null>(null);
-  const isAuthenticated = !!user;
-
+  
   useEffect(() => {
     // Initialize users in local storage
     initializeUsers();
 
-    // Check if user is already logged in
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -52,14 +49,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const isFirstLogin = (username: string): boolean => {
     return checkIsFirstLogin(username);
   };
-
+  const isAuthenticated = () => !!user;
   const value = {
     user,
     login,
     logout,
     setInitialPin,
     isFirstLogin,
-    isAuthenticated
+    isAuthenticated: isAuthenticated()
   };
 
   return (

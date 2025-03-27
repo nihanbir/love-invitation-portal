@@ -142,7 +142,7 @@ const LoginForm = () => {
                                         id="pin"
                                         type="password"
                                         maxLength={4}
-                                        placeholder="••••"
+                                        placeholder="Enter your pin here"
                                         value={pin}
                                         onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, '').slice(0, 4))}
                                         className="pl-10"
@@ -150,13 +150,13 @@ const LoginForm = () => {
                                 </div>
                             </div>
                             {error && <p className="text-red-500 text-sm">{error}</p>}
-                            <Button type="submit" className="w-full">
+                            <Button type="submit" className="w-full bg-wedding-primary hover:bg-wedding-accent/90 text-white">
                                 Login
                             </Button>
                             <Button
                                 type="button"
                                 variant="outline"
-                                className="w-full"
+                                className="w-full hover:bg-wedding-accent/90 hover:text-white"
                                 onClick={() => setStep('username')}
                             >
                                 Back

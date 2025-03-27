@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, logout } = useAuth();
   const location = useLocation();
 
   const navLinks = [
@@ -98,11 +98,11 @@ const Navbar: React.FC = () => {
               </Link>
             ))}
 
-            {isAuthenticated ? (
+            {!!user ? (
               <Button 
                 variant="outline" 
                 onClick={logout}
-                className="text-wedding-primary hover:bg-wedding-primary hover:text-wedding-primary hover:bg-wedding-secondary/70 transition-all duration-300"
+                className="text-white bg-wedding-primary hover:text-wedding-primary hover:bg-wedding-secondary/70 transition-all duration-300"
               >
                 Sign Out
               </Button>
@@ -152,7 +152,7 @@ const Navbar: React.FC = () => {
             </Link>
           ))}
 
-          {isAuthenticated ? (
+          {!!user ? (
             <Button 
               variant="outline" 
               onClick={logout}
