@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
                     : 'text-wedding-dark hover:text-wedding-primary'
             )}
           >
-            Our Wedding
+            Nihan & Ale Wedding
           </Link>
 
           {/* Desktop Navigation */}

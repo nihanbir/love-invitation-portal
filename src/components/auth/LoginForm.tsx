@@ -96,7 +96,7 @@ const LoginForm = () => {
         <Card className="w-full max-w-md mx-auto">
             <CardHeader>
                 <CardTitle className="text-primary text-2xl text-center">
-                    {step === 'username' && 'Login to Our Wedding'}
+                    {step === 'username' && 'Login'}
                     {step === 'pin' && 'Enter Your PIN'}
                     {step === 'createPin' && 'Create Your PIN'}
                 </CardTitle>
@@ -116,7 +116,7 @@ const LoginForm = () => {
                                     <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                                     <Input
                                         id="username"
-                                        placeholder="your_username"
+                                        placeholder="name.lastname"
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                         className="pl-10"
@@ -124,7 +124,7 @@ const LoginForm = () => {
                                 </div>
                             </div>
                             {error && <p className="text-red-500 text-sm">{error}</p>}
-                            <Button type="submit" className="w-full">
+                            <Button type="submit" className="w-full bg-wedding-primary hover:bg-wedding-accent/90 text-white">
                                 Continue
                             </Button>
                         </div>
@@ -191,13 +191,13 @@ const LoginForm = () => {
                                 />
                             </div>
                             {error && <p className="text-red-500 text-sm">{error}</p>}
-                            <Button type="submit" className="w-full">
+                            <Button type="submit" className="w-full bg-wedding-primary hover:bg-wedding-accent/90 text-white">
                                 Create PIN
                             </Button>
                             <Button
                                 type="button"
                                 variant="outline"
-                                className="w-full"
+                                className="w-full hover:bg-wedding-accent/90 hover:text-white"
                                 onClick={() => setStep('username')}
                             >
                                 Back
@@ -208,7 +208,7 @@ const LoginForm = () => {
             </CardContent>
             <CardFooter className="flex flex-col space-y-2">
                 <p className="text-sm text-center text-muted-foreground">
-                    This login system uses predefined accounts. If you don't have a username, please contact the couple.
+                    This login system uses predefined accounts. If your username is missing, please contact the couple.
                 </p>
             </CardFooter>
         </Card>

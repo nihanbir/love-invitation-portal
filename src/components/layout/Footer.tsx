@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
               to="/" 
               className="font-serif text-2xl text-wedding-dark font-medium transition-colors hover:text-wedding-primary"
             >
-              Our Wedding
+              Nihan & Ale Wedding
             </Link>
           </div>
           
