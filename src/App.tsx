@@ -1,44 +1,42 @@
 
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from '@/context/AuthContext';
+import { Toaster } from "@/components/ui/toaster";
 import { PrivateRoute } from '@/components/PrivateRoute';
-import { Toaster } from '@/components/ui/toaster';
-
-// Import pages
-import HomePage from '@/pages/HomePage';
-import VenuePage from '@/pages/VenuePage';
-import TimelinePage from '@/pages/TimelinePage';
-import MenuPage from '@/pages/MenuPage';
-import SeatingPage from '@/pages/SeatingPage';
-import RsvpPage from '@/pages/RsvpPage';
-import GalleryPage from '@/pages/GalleryPage';
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import Index from "./pages/Index";
+import Details from "./pages/Details";
+import Gallery from "./pages/Gallery";
 import LoginPage from '@/pages/LoginPage';
+import RsvpPage from "./pages/RsvpPage";
+import NotFound from "./pages/NotFound";
 
-function App() {
-  return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/venue" element={<VenuePage />} />
-          <Route path="/timeline" element={<TimelinePage />} />
-          <Route path="/menu" element={<MenuPage />} />
-          <Route path="/seating" element={<SeatingPage />} />
-          
-          {/* Protected Routes */}
-          <Route element={<PrivateRoute />}>
-            <Route path="/rsvp" element={<RsvpPage />} />
-            <Route path="/dashboard" element={<Navigate to="/rsvp" replace />} />
-          </Route>
-          
-          <Route path="/gallery" element={<GalleryPage />} />
-        </Routes>
-      </Router>
-      <Toaster />
-    </AuthProvider>
-  );
-}
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <HashRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/details" element={<Details />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/rsvp" element={<RsvpPage />} />
+              <Route path="/dashboard" element={<Navigate to="/rsvp" replace />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </HashRouter>
+      </AuthProvider>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
