@@ -2,34 +2,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { 
-  CalendarDays, 
-  Heart, 
-  GalleryHorizontal, 
-  User, 
-  Menu, 
-  X
-} from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
+import { useMobile } from '@/hooks/use-mobile';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-
-  const navLinks = [
-    { name: 'Home', path: '/', icon: <Heart size={18} /> },
-    { name: 'Details', path: '/details', icon: <CalendarDays size={18} /> },
-    { name: 'Gallery', path: '/gallery', icon: <GalleryHorizontal size={18} /> },
-  ];
+  const isMobile = useMobile();
+  const { user, logout } = useAuth();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -37,121 +27,148 @@ const Navbar: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMobileMenuOpen]);
-
-  // Close mobile menu when changing routes
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
+    // Close the menu when route changes
+    setIsMenuOpen(false);
   }, [location.pathname]);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <>
-      <nav 
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4',
-          isScrolled ? 'bg-wedding-accent/50 backdrop-blur-md shadow-soft' : 'bg-transparent'
-        )}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link 
-            to="/" 
-            className={cn("font-serif text-2xl font-medium transition-colors",
-                location.pathname === '/'
-                    ? 'text-wedding-primary'
-                    : 'text-wedding-dark hover:text-wedding-primary'
-            )}
-          >
-            Our Wedding
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3",
+        isScrolled
+          ? "bg-white shadow-md"
+          : "bg-transparent"
+      )}
+    >
+      <div className="container mx-auto px-6">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link to="/" className="font-serif text-xl text-wedding-dark">
+            Nihan <span className="text-wedding-primary">&</span> Ale
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8 ">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  'flex items-center gap-2 text-2l font-medium transition-colors link-underline',
-                    location.pathname === '/'
-                        ? 'text-wedding-primary'
-                        : 'text-wedding-dark hover:text-wedding-primary',
-                    location.pathname === link.path
-                    ? 'text-wedding-primary' 
-                    : '',
-                    
-                )}
-              >
-                {link.icon}
-                <span>{link.name}</span>
-              </Link>
-            ))}
-
+          <nav className="hidden md:flex items-center space-x-6">
             <Link
-                to="https://tally.so/r/3NPJPW"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-              <Button size="lg" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white transition-all px-8 py-6 rounded-md">
-                RSVP Now
-              </Button>
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-wedding-primary" 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      <div 
-        className={cn(
-          'fixed inset-0 z-40 bg-white/95 backdrop-blur-md flex flex-col justify-center items-center transition-transform duration-500 md:hidden',
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        )}
-      >
-        <div className="flex flex-col items-center space-y-8 py-12">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
+              to="/"
               className={cn(
-                'flex items-center gap-3 text-lg font-medium py-2 px-4 rounded-md transition-all',
-                location.pathname === link.path 
-                  ? 'text-wedding-primary bg-wedding-secondary/50' 
-                  : 'text-wedding-dark hover:text-wedding-primary hover:bg-wedding-secondary/20'
+                "font-medium text-sm transition-colors",
+                location.pathname === "/"
+                  ? "text-wedding-primary"
+                  : "text-wedding-dark hover:text-wedding-primary"
               )}
             >
-              {link.icon}
-              <span>{link.name}</span>
+              {t('common.home')}
             </Link>
-          ))}
+            <Link
+              to="/details"
+              className={cn(
+                "font-medium text-sm transition-colors",
+                location.pathname === "/details"
+                  ? "text-wedding-primary"
+                  : "text-wedding-dark hover:text-wedding-primary"
+              )}
+            >
+              {t('common.details')}
+            </Link>
+            <Link
+              to="/gallery"
+              className={cn(
+                "font-medium text-sm transition-colors",
+                location.pathname === "/gallery"
+                  ? "text-wedding-primary"
+                  : "text-wedding-dark hover:text-wedding-primary"
+              )}
+            >
+              {t('common.gallery')}
+            </Link>
+            
+            <div className="pl-4 flex items-center space-x-3">
+              <LanguageSwitcher />
+              
+              {user ? (
+                <Button variant="default" size="sm" onClick={logout} className="bg-wedding-primary hover:bg-wedding-accent/90 text-white">
+                  {t('common.logout')}
+                </Button>
+              ) : (
+                <Link to="/login">
+                  <Button variant="default" size="sm" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white">
+                    {t('common.login')}
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </nav>
 
-          <Link
-              to="https://tally.so/r/3NPJPW"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            <Button size="lg" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white transition-all px-8 py-6 rounded-md">
-              RSVP Now
-            </Button>
-          </Link>
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-4">
+            <LanguageSwitcher />
+            <button
+              onClick={toggleMenu}
+              className="text-wedding-dark focus:outline-none"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <nav className="md:hidden pt-4 pb-2 flex flex-col space-y-3">
+            <Link
+              to="/"
+              className={cn(
+                "font-medium py-2 transition-colors",
+                location.pathname === "/"
+                  ? "text-wedding-primary"
+                  : "text-wedding-dark hover:text-wedding-primary"
+              )}
+            >
+              {t('common.home')}
+            </Link>
+            <Link
+              to="/details"
+              className={cn(
+                "font-medium py-2 transition-colors",
+                location.pathname === "/details"
+                  ? "text-wedding-primary"
+                  : "text-wedding-dark hover:text-wedding-primary"
+              )}
+            >
+              {t('common.details')}
+            </Link>
+            <Link
+              to="/gallery"
+              className={cn(
+                "font-medium py-2 transition-colors",
+                location.pathname === "/gallery"
+                  ? "text-wedding-primary"
+                  : "text-wedding-dark hover:text-wedding-primary"
+              )}
+            >
+              {t('common.gallery')}
+            </Link>
+            <div className="pt-2">
+              {user ? (
+                <Button variant="default" onClick={logout} className="w-full bg-wedding-primary hover:bg-wedding-accent/90 text-white">
+                  {t('common.logout')}
+                </Button>
+              ) : (
+                <Link to="/login" className="w-full">
+                  <Button variant="default" className="w-full bg-wedding-primary hover:bg-wedding-accent/90 text-white">
+                    {t('common.login')}
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </nav>
+        )}
       </div>
-    </>
+    </header>
   );
 };
 
