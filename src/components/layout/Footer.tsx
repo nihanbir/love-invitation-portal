@@ -43,7 +43,7 @@ const Footer = () => {
           
           {/* Contact */}
           <div>
-            <h4 className="font-medium text-lg mb-4">Contact</h4>
+            <h4 className="font-medium text-lg mb-4">{t('common.contact')}</h4>
             <ul className="space-y-3">
               <li className="flex items-center space-x-3">
                 <Mail size={16} className="text-wedding-primary" />

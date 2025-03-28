@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/contexts/AuthContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -14,7 +13,6 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const isMobile = useIsMobile();
-  const { user, logout } = useAuth();
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -89,18 +87,6 @@ const Navbar = () => {
             
             <div className="pl-4 flex items-center space-x-3">
               <LanguageSwitcher />
-              
-              {user ? (
-                <Button variant="default" size="sm" onClick={logout} className="bg-wedding-primary hover:bg-wedding-accent/90 text-white">
-                  {t('common.logout')}
-                </Button>
-              ) : (
-                <Link to="/login">
-                  <Button variant="default" size="sm" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white">
-                    {t('common.login')}
-                  </Button>
-                </Link>
-              )}
             </div>
           </nav>
 
@@ -152,19 +138,6 @@ const Navbar = () => {
             >
               {t('common.gallery')}
             </Link>
-            <div className="pt-2">
-              {user ? (
-                <Button variant="default" onClick={logout} className="w-full bg-wedding-primary hover:bg-wedding-accent/90 text-white">
-                  {t('common.logout')}
-                </Button>
-              ) : (
-                <Link to="/login" className="w-full">
-                  <Button variant="default" className="w-full bg-wedding-primary hover:bg-wedding-accent/90 text-white">
-                    {t('common.login')}
-                  </Button>
-                </Link>
-              )}
-            </div>
           </nav>
         )}
       </div>
