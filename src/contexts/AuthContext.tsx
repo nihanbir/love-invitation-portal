@@ -1,14 +1,16 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { User, authenticateUser, registerUser } from '@/lib/auth';
+import { User, authenticateUser, registerUser, userExists, isValidPin, setInitialPin, authenticateWithPin } from '@/lib/auth';
 
 export type AuthContextType = {
   user: User | null;
-  login: (username: string, password: string) => Promise<User | null>;
+  login: (username: string, pin: string) => Promise<boolean>;
   register: (username: string, password: string, name: string, email: string) => Promise<User | null>;
   logout: () => void;
   isLoading: boolean;
   error: string | null;
+  isFirstLogin: (username: string) => boolean;
+  setInitialPin: (username: string, pin: string) => Promise<boolean>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -26,26 +28,26 @@ export const AuthProvider: React.FC<{children: ReactNode}> = ({ children }) => {
     }
   }, []);
 
-  const login = async (username: string, password: string): Promise<User | null> => {
+  const login = async (username: string, pin: string): Promise<boolean> => {
     setIsLoading(true);
     setError(null);
     
     try {
-      // Call the authentication service
-      const authenticatedUser = authenticateUser(username, password);
+      // Call the authentication service with PIN
+      const authenticatedUser = authenticateWithPin(username, pin);
       
       if (authenticatedUser) {
         // Store the user in localStorage
         localStorage.setItem('currentUser', JSON.stringify(authenticatedUser));
         setUser(authenticatedUser);
-        return authenticatedUser;
+        return true;
       } else {
-        setError('Invalid username or password');
-        return null;
+        setError('Invalid username or PIN');
+        return false;
       }
     } catch (err) {
       setError('An error occurred during login');
-      return null;
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -87,8 +89,33 @@ export const AuthProvider: React.FC<{children: ReactNode}> = ({ children }) => {
     setUser(null);
   };
 
+  const isFirstLogin = (username: string): boolean => {
+    return userExists(username) && !isValidPin(username);
+  };
+
+  const handleSetInitialPin = async (username: string, pin: string): Promise<boolean> => {
+    try {
+      const success = setInitialPin(username, pin);
+      return success;
+    } catch (error) {
+      console.error("Error setting initial PIN:", error);
+      return false;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, isLoading, error }}>
+    <AuthContext.Provider 
+      value={{ 
+        user, 
+        login, 
+        register, 
+        logout, 
+        isLoading, 
+        error, 
+        isFirstLogin, 
+        setInitialPin: handleSetInitialPin 
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
