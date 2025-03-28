@@ -12,16 +12,18 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
 
   const navLinks = [
-    { name: 'Home', path: '/', icon: <Heart size={18} /> },
-    { name: 'Details', path: '/details', icon: <CalendarDays size={18} /> },
-    { name: 'Gallery', path: '/gallery', icon: <GalleryHorizontal size={18} /> },
+    { name: t('common.home'), path: '/', icon: <Heart size={18} /> },
+    { name: t('common.details'), path: '/details', icon: <CalendarDays size={18} /> },
+    { name: t('common.gallery'), path: '/gallery', icon: <GalleryHorizontal size={18} /> },
   ];
 
   useEffect(() => {
@@ -105,7 +107,7 @@ const Navbar: React.FC = () => {
                 rel="noopener noreferrer"
             >
               <Button size="lg" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white transition-all px-8 py-6 rounded-md">
-                RSVP Now
+                {t('common.rsvpButton')}
               </Button>
             </Link>
           </div>
@@ -151,7 +153,7 @@ const Navbar: React.FC = () => {
               rel="noopener noreferrer"
           >
             <Button size="lg" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white transition-all px-8 py-6 rounded-md">
-              RSVP Now
+              {t('common.rsvpButton')}
             </Button>
           </Link>
         </div>

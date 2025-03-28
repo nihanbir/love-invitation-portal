@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, MapPin, Users, Utensils } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 import {
   WEDDING_DATE,
@@ -16,6 +17,8 @@ import {
 } from '@/constants/wedding';
 
 const Index = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -31,10 +34,10 @@ const Index = () => {
         <section id="about-section" className="py-20 bg-white">
           <div className="container max-w-5xl mx-auto px-6">
             <AnimatedSection className="text-center mb-16" animation="fade-in">
-              <h2 className="font-serif text-4xl text-wedding-dark mb-4">Our Story</h2>
+              <h2 className="font-serif text-4xl text-wedding-dark mb-4">{t('home.ourStory')}</h2>
               <div className="w-16 h-0.5 bg-wedding-primary mx-auto mb-8"></div>
               <p className="text-wedding-muted max-w-3xl mx-auto leading-relaxed">
-                We are overjoyed to invite you to join us for our wedding celebration. Our journey began with a chance meeting at Forsberg's Skola, and we've been inseparable ever since. Through all of life's adventures, both big and small, we've built a partnership that we're excited to make official. We can't wait to celebrate this special day with our beloved family and friends.
+                {t('home.ourStoryContent')}
               </p>
             </AnimatedSection>
             
@@ -50,13 +53,13 @@ const Index = () => {
               </AnimatedSection>
               
               <AnimatedSection animation="slide-up" delay={400}>
-                <h3 className="font-serif text-3xl text-wedding-dark mb-4">Our Vision</h3>
+                <h3 className="font-serif text-3xl text-wedding-dark mb-4">{t('home.ourVision')}</h3>
                 <p className="text-wedding-muted mb-6 leading-relaxed">
-                  We're creating a celebration that reflects our love story – elegant yet relaxed, thoughtful and joyful. Our hope is to create beautiful memories with the people who mean the most to us, and to begin this next chapter surrounded by love.
+                  {t('home.ourVisionContent')}
                 </p>
                 <Link to="/details">
                   <Button className="bg-wedding-primary hover:bg-wedding-accent/90 text-white transition-all">
-                    Explore Details
+                    {t('home.exploreDetails')}
                   </Button>
                 </Link>
               </AnimatedSection>
@@ -68,10 +71,10 @@ const Index = () => {
         <section className="py-20 bg-wedding-secondary/30">
           <div className="container max-w-6xl mx-auto px-6">
             <AnimatedSection className="text-center mb-16" animation="fade-in">
-              <h2 className="font-serif text-4xl text-wedding-dark mb-4">Event Highlights</h2>
+              <h2 className="font-serif text-4xl text-wedding-dark mb-4">{t('home.eventHighlights')}</h2>
               <div className="w-16 h-0.5 bg-wedding-primary mx-auto mb-8"></div>
               <p className="text-wedding-muted max-w-3xl mx-auto">
-                Here's everything you need to know about our special day. We've put together all the important details to help you plan and prepare.
+                {t('home.eventHighlightsContent')}
               </p>
             </AnimatedSection>
             
@@ -82,7 +85,7 @@ const Index = () => {
                     <Calendar className="text-wedding-primary h-6 w-6" />
                   </div>
                 </div>
-                <h3 className="font-serif text-xl text-wedding-dark mb-2 text-center">Ceremony & Reception</h3>
+                <h3 className="font-serif text-xl text-wedding-dark mb-2 text-center">{t('home.ceremonyReception')}</h3>
                 <p className="text-wedding-muted text-center text-sm">
                   {WEDDING_DATE}
                   <br />Ceremony: {CEREMONY_DETAILS.time}
@@ -96,7 +99,7 @@ const Index = () => {
                     <MapPin className="text-wedding-primary h-6 w-6" />
                   </div>
                 </div>
-                <h3 className="font-serif text-xl text-wedding-dark mb-2 text-center">Venue</h3>
+                <h3 className="font-serif text-xl text-wedding-dark mb-2 text-center">{t('home.venue')}</h3>
                 <p className="text-wedding-muted text-center text-sm">
                   Fredriksborg Hotell & Restaurang
                   <br />Fredriksborgsvägen 17
@@ -110,7 +113,7 @@ const Index = () => {
                     <Utensils className="text-wedding-primary h-6 w-6" />
                   </div>
                 </div>
-                <h3 className="font-serif text-xl text-wedding-dark mb-2 text-center">Menu</h3>
+                <h3 className="font-serif text-xl text-wedding-dark mb-2 text-center">{t('home.menu')}</h3>
                 <p className="text-wedding-muted text-center text-sm">
                   TBA
                   <br />
@@ -124,7 +127,7 @@ const Index = () => {
                     <Users className="text-wedding-primary h-6 w-6" />
                   </div>
                 </div>
-                <h3 className="font-serif text-xl text-wedding-dark mb-2 text-center">Accommodations</h3>
+                <h3 className="font-serif text-xl text-wedding-dark mb-2 text-center">{t('home.accommodations')}</h3>
                 <p className="text-wedding-muted text-center text-sm">
                   We will be able to accommodate up to 30 guests at the wedding venue for the wedding night, with priority
                   given to those traveling from abroad.
@@ -137,7 +140,7 @@ const Index = () => {
             <div className="text-center mt-12">
               <Link to="/details">
                 <Button variant="outline" className="bg-wedding-primary hover:bg-wedding-accent/90 hover:text-white text-white transition-all">
-                  See Full Details
+                  {t('home.seeFullDetails')}
                 </Button>
               </Link>
             </div>
@@ -149,10 +152,10 @@ const Index = () => {
           <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]"></div>
           <div className="container max-w-5xl mx-auto px-6 relative z-10">
             <AnimatedSection className="text-center" animation="fade-in">
-              <h2 className="font-serif text-4xl text-white mb-4">Join Us On Our Special Day</h2>
+              <h2 className="font-serif text-4xl text-white mb-4">{t('home.joinUs')}</h2>
               <div className="w-16 h-0.5 bg-wedding-primary mx-auto mb-8"></div>
               <p className="text-white/90 max-w-2xl mx-auto mb-10">
-                We would be honored by your presence as we celebrate our love. Please let us know if you'll be joining us by completing the RSVP form.
+                {t('home.joinUsContent')}
               </p>
               <Link
                   to="https://tally.so/r/3NPJPW"
@@ -160,7 +163,7 @@ const Index = () => {
                   rel="noopener noreferrer"
               >
                 <Button size="lg" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white transition-all px-8 py-6 rounded-md">
-                  RSVP Now
+                  {t('common.rsvpButton')}
                 </Button>
               </Link>
             </AnimatedSection>
