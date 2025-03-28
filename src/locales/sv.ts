@@ -1,3 +1,4 @@
+
 export default {
   common: {
     welcomeMessage: "Välkommen till vår bröllopssida",
@@ -9,7 +10,6 @@ export default {
     home: "Hem",
     login: "Logga in",
     logout: "Logga ut",
-    contact: "Kontakt",
   },
   home: {
     ourStory: "Vår Historia",
