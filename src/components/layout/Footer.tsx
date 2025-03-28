@@ -1,75 +1,63 @@
 
 import React from 'react';
-import { Instagram, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { Heart } from 'lucide-react';
 
-const Footer = () => {
-  const { t } = useLanguage();
-  
+const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-wedding-dark text-white py-12">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Logo and Info */}
-          <div>
-            <h3 className="font-serif text-2xl mb-4">Nihan & Ale</h3>
-            <p className="text-white/80 max-w-xs">
-              {t('common.welcomeMessage')}
+    <footer className="bg-wedding-secondary/30 border-t border-wedding-accent/20 py-12">
+      <div className="container max-w-7xl mx-auto px-6">
+        <div className="flex flex-col items-center">
+          <div className="mb-6">
+            <Link 
+              to="/" 
+              className="font-serif text-2xl text-wedding-dark font-medium transition-colors hover:text-wedding-primary"
+            >
+              Our Wedding
+            </Link>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-6 mb-8">
+            <Link 
+              to="/" 
+              className="text-sm text-wedding-dark hover:text-wedding-primary transition-colors"
+            >
+              Home
+            </Link>
+            <Link 
+              to="/details" 
+              className="text-sm text-wedding-dark hover:text-wedding-primary transition-colors"
+            >
+              Details
+            </Link>
+            <Link 
+              to="/gallery" 
+              className="text-sm text-wedding-dark hover:text-wedding-primary transition-colors"
+            >
+              Gallery
+            </Link>
+            <Link
+                to="https://tally.so/r/3NPJPW"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-wedding-dark hover:text-wedding-primary transition-colors"
+            >
+              RSVP
+            </Link>
+          </div>
+          
+          <div className="flex items-center justify-center mb-4">
+            <Heart size={16} className="text-wedding-primary mr-2" />
+            <p className="text-sm text-wedding-muted">
+              Made with love for our special day
             </p>
           </div>
           
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-medium text-lg mb-4">{t('common.details')}</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className="text-white/80 hover:text-white transition-colors">
-                  {t('common.home')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/details" className="text-white/80 hover:text-white transition-colors">
-                  {t('common.details')}
-                </Link>
-              </li>
-              <li>
-                <Link to="/gallery" className="text-white/80 hover:text-white transition-colors">
-                  {t('common.gallery')}
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Contact */}
-          <div>
-            <h4 className="font-medium text-lg mb-4">{t('common.contact')}</h4>
-            <ul className="space-y-3">
-              <li className="flex items-center space-x-3">
-                <Mail size={16} className="text-wedding-primary" />
-                <a href="mailto:nihan.bir@gmail.com" className="text-white/80 hover:text-white transition-colors">nihan.bir@gmail.com</a>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Phone size={16} className="text-wedding-primary" />
-                <span className="text-white/80">+46707314374</span>
-              </li>
-              <li>
-                <a 
-                  href="https://www.instagram.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 text-white/80 hover:text-white transition-colors"
-                >
-                  <Instagram size={16} className="text-wedding-primary" />
-                  <span>@nihanale</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="border-t border-white/10 mt-10 pt-6 text-center text-white/60 text-sm">
-          <p>© {new Date().getFullYear()} Nihan & Ale. All rights reserved.</p>
+          <p className="text-xs text-wedding-muted text-center">
+            © {currentYear} Nihan Bir & Ale Flärd. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
