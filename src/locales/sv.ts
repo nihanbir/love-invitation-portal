@@ -8,8 +8,7 @@ export default {
     details: "Detaljer",
     gallery: "Galleri",
     home: "Hem",
-    login: "Logga in",
-    logout: "Logga ut",
+    contact: "Kontakt"
   },
   home: {
     ourStory: "Vår Historia",
@@ -36,23 +35,6 @@ export default {
     noPhotos: "Inga foton hittades i denna kategori.",
     weddingPhotos: "Bröllopsdagsfoton Kommer Snart",
     weddingPhotosDesc: "Efter vårt bröllop kommer vi att uppdatera detta galleri med foton från vår speciella dag. Kom tillbaka snart!",
-  },
-  rsvp: {
-    title: "OSA",
-    description: "Vi ser fram emot att fira med dig! Låt oss veta om du kan komma.",
-    hello: "Hej",
-    fillDetails: "Vänligen fyll i dina OSA-uppgifter nedan.",
-    attending: "Kommer du att delta?",
-    yes: "Ja, jag kommer!",
-    no: "Tyvärr, jag kan inte komma",
-    dietary: "Kostrestriktioner",
-    dietaryPlaceholder: "Vänligen låt oss veta om du har några kostrestriktioner",
-    plusOne: "Jag vill ta med en gäst",
-    backToHome: "Tillbaka till Hem",
-    logout: "Logga ut",
-    submit: "Skicka OSA",
-    questions: "Frågor?",
-    questionDesc: "Om du har några frågor om din OSA, tveka inte att kontakta oss.",
   },
   details: {
     title: "Bröllopsinformation",

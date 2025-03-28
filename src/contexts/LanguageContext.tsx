@@ -6,13 +6,16 @@ import tr from '../locales/tr';
 
 export type Language = 'en' | 'sv' | 'tr';
 
+// Define the shape of our translations
+type TranslationsType = typeof en;
+
 interface LanguageContextType {
   language: Language;
   setLanguage: (language: Language) => void;
   t: (key: string, params?: Record<string, string>) => string;
 }
 
-const translations = {
+const translations: Record<Language, TranslationsType> = {
   en,
   sv,
   tr
@@ -44,10 +47,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const t = (key: string, params?: Record<string, string>) => {
     const keys = key.split('.');
-    let value = translations[language];
+    let value: any = translations[language];
     
     for (const k of keys) {
-      if (!value) return key;
+      if (!value || typeof value !== 'object') return key;
       value = value[k as keyof typeof value];
     }
     

@@ -8,8 +8,7 @@ export default {
     details: "Details",
     gallery: "Gallery",
     home: "Home",
-    login: "Login",
-    logout: "Logout",
+    contact: "Contact"
   },
   home: {
     ourStory: "Our Story",
@@ -36,23 +35,6 @@ export default {
     noPhotos: "No photos found in this category.",
     weddingPhotos: "Wedding Day Photos Coming Soon",
     weddingPhotosDesc: "After our wedding, we'll update this gallery with photos from our special day. Check back soon!",
-  },
-  rsvp: {
-    title: "RSVP",
-    description: "We're excited to celebrate with you! Please let us know if you can make it.",
-    hello: "Hello",
-    fillDetails: "Please fill out your RSVP details below.",
-    attending: "Will you be attending?",
-    yes: "Yes, I'll be there!",
-    no: "Sorry, I can't make it",
-    dietary: "Dietary Requirements",
-    dietaryPlaceholder: "Please let us know if you have any dietary requirements",
-    plusOne: "I would like to bring a plus one",
-    backToHome: "Back to Home",
-    logout: "Logout",
-    submit: "Submit RSVP",
-    questions: "Questions?",
-    questionDesc: "If you have any questions about your RSVP, please don't hesitate to contact us.",
   },
   details: {
     title: "Wedding Details",
