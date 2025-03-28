@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/contexts/AuthContext';
 import { 
   CalendarDays, 
   Heart, 
@@ -16,14 +15,12 @@ import { cn } from '@/lib/utils';
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, logout } = useAuth();
   const location = useLocation();
 
   const navLinks = [
     { name: 'Home', path: '/', icon: <Heart size={18} /> },
     { name: 'Details', path: '/details', icon: <CalendarDays size={18} /> },
     { name: 'Gallery', path: '/gallery', icon: <GalleryHorizontal size={18} /> },
-    { name: 'RSVP', path: '/rsvp', icon: <User size={18} /> },
   ];
 
   useEffect(() => {
@@ -73,7 +70,7 @@ const Navbar: React.FC = () => {
                     : 'text-wedding-dark hover:text-wedding-primary'
             )}
           >
-            Nihan & Ale Wedding
+            Our Wedding
           </Link>
 
           {/* Desktop Navigation */}
@@ -98,24 +95,15 @@ const Navbar: React.FC = () => {
               </Link>
             ))}
 
-            {!!user ? (
-              <Button 
-                variant="outline" 
-                onClick={logout}
-                className="text-white bg-wedding-primary hover:text-wedding-primary hover:bg-wedding-secondary/70 transition-all duration-300"
-              >
-                Sign Out
+            <Link
+                to="https://tally.so/r/3NPJPW"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+              <Button size="lg" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white transition-all px-8 py-6 rounded-md">
+                RSVP Now
               </Button>
-            ) : (
-              <Link to="/rsvp">
-                <Button 
-                  variant="outline"
-                  className="text-white bg-wedding-primary hover:text-wedding-primary hover:bg-wedding-secondary/70 transition-all duration-300"
-                >
-                  Sign In
-                </Button>
-              </Link>
-            )}
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -152,24 +140,15 @@ const Navbar: React.FC = () => {
             </Link>
           ))}
 
-          {!!user ? (
-            <Button 
-              variant="outline" 
-              onClick={logout}
-              className="w-full mt-4 border-wedding-primary text-wedding-primary hover:bg-wedding-primary hover:text-white"
-            >
-              Sign Out
+          <Link
+              to="https://tally.so/r/3NPJPW"
+              target="_blank"
+              rel="noopener noreferrer"
+          >
+            <Button size="lg" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white transition-all px-8 py-6 rounded-md">
+              RSVP Now
             </Button>
-          ) : (
-            <Link to="/rsvp" className="w-full mt-4">
-              <Button 
-                variant="outline"
-                className="w-full border-wedding-primary text-wedding-primary hover:bg-wedding-primary hover:text-white"
-              >
-                Sign In
-              </Button>
-            </Link>
-          )}
+          </Link>
         </div>
       </div>
     </>

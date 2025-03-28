@@ -14,7 +14,6 @@ import {
   Music, 
   Gift
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import RSVPBanner from '@/components/shared/RSVPBanner';
 import WeddingDetailsCard from '@/components/shared/WeddingDetailsCard';
 import {

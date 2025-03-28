@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
               to="/" 
               className="font-serif text-2xl text-wedding-dark font-medium transition-colors hover:text-wedding-primary"
             >
-              Nihan & Ale Wedding
+              Our Wedding
             </Link>
           </div>
           
@@ -38,9 +38,11 @@ const Footer: React.FC = () => {
             >
               Gallery
             </Link>
-            <Link 
-              to="/rsvp" 
-              className="text-sm text-wedding-dark hover:text-wedding-primary transition-colors"
+            <Link
+                to="https://tally.so/r/3NPJPW"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-wedding-dark hover:text-wedding-primary transition-colors"
             >
               RSVP
             </Link>

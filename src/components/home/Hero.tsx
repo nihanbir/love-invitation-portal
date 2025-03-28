@@ -103,8 +103,12 @@ const Hero: React.FC<HeroProps> = ({
                 View Details
               </Button>
             </Link>
-            <Link to="/rsvp">
-              <Button className="bg-wedding-primary hover:bg-wedding-secondary/90 hover:text-wedding-primary text-white transition-all px-6 py-5 rounded-md">
+            <Link
+                to="https://tally.so/r/3NPJPW"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+              <Button size="lg" className="bg-wedding-primary hover:bg-wedding-accent/90 text-white transition-all px-8 py-6 rounded-md">
                 RSVP Now
               </Button>
             </Link>
